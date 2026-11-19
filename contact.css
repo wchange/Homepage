@@ -30,3 +30,22 @@
 .contact-channel .qr-disclosure img.official-qr{width:100%;max-width:260px}
 @media(max-width:760px){.contact-channels{grid-template-columns:1fr;gap:16px}.about-band .contact-channel{min-height:0;padding:23px 24px 17px}.contact-channel h3{font-size:23px;margin-top:16px}.contact-channel .contact-id{font-size:14px;margin-bottom:15px}.contact-channel .contact-action{font-size:13px}.contact-channel>.qr-disclosure{margin-top:4px;padding-top:8px}.contact-channel .qr-disclosure summary{font-size:12px}}
 @media(hover:hover) and (prefers-reduced-motion:no-preference){.about-band .contact-channel:hover{transform:translateY(-4px);box-shadow:0 1px 2px #283b2614,0 12px 20px -12px #283b2630,0 28px 45px -22px #283b2640,inset 0 0 0 1px #d2d6ca80}}
+
+/* Compact cards: contact information on the left, matching QR codes on the right. */
+.contact-channels{gap:16px;align-items:stretch}
+.about-band .contact-channel{display:grid;grid-template-columns:minmax(0,1fr) 104px;align-items:center;gap:15px;min-height:0;padding:22px 20px}
+.contact-card-info{min-width:0}
+.contact-card-info .channel-platform{font-size:9px;padding:4px 8px;letter-spacing:.2px;gap:6px}
+.contact-card-info h3{font-size:19px;letter-spacing:0;margin:16px 0 6px}
+.contact-card-info .contact-id{font-size:11px;margin-bottom:12px;line-height:1.8}
+.contact-card-info .channel-actions{margin:0;gap:2px 10px;min-height:44px}
+.contact-card-info .contact-action{font-size:11px;white-space:nowrap}
+.contact-card-info .channel-actions>a{padding:8px 9px}
+.contact-card-info .channel-actions>button{font-size:10px}
+.contact-card-qr{margin:0;text-align:center;min-width:0;align-self:center}
+.contact-card-qr>a{display:block;border:1px solid #e5e5dd;border-radius:9px;padding:3px;background:#fff;box-shadow:0 2px 5px #34452d08;overflow:hidden}
+.contact-card-qr img{width:100%;height:auto;aspect-ratio:1;display:block}
+.contact-card-qr figcaption{font-size:10px;color:#75806d;margin-top:8px;white-space:nowrap}
+@media(min-width:761px) and (max-width:1100px){.contact-channels{grid-template-columns:1fr}.about-band .contact-channel{grid-template-columns:minmax(0,1fr) 112px;padding:20px 25px}.contact-card-info h3{font-size:22px}.contact-card-info .contact-id{font-size:13px}.contact-card-info .contact-action{font-size:12px}}
+@media(max-width:760px){.about-band .contact-channel{grid-template-columns:minmax(0,1fr) 96px;padding:20px 18px;gap:14px}.contact-card-info h3{font-size:20px;margin-top:14px}.contact-card-info .contact-id{font-size:12px;margin-bottom:8px}.contact-card-qr figcaption{font-size:10px}}
+@media(max-width:360px){.about-band .contact-channel{grid-template-columns:minmax(0,1fr) 82px;padding:18px 14px;gap:10px}.contact-card-info h3{font-size:18px}.contact-card-info .channel-platform{font-size:8px;padding:4px 6px}.contact-card-info .channel-actions{gap:2px 7px}.contact-card-info .channel-actions>a{padding:8px}.contact-card-qr figcaption{font-size:9px}}
