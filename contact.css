@@ -6,3 +6,27 @@
 @media(max-width:600px){.contact-channel .qr-disclosure{grid-column:1/-1;margin-top:10px}.contact-heading>p,.contact-id{font-size:14px}.contact-action{font-size:12px}.qr-disclosure p{font-size:12px}}
 .channel-actions{display:flex;gap:14px;flex-wrap:wrap}.channel-actions .contact-action{font-size:11px;gap:8px}.qr-disclosure img.official-qr{width:230px;height:auto;image-rendering:auto}.contact-channel{align-content:start}.contact-channel .contact-action,.contact-channel .channel-actions{max-width:100%}
 @media(max-width:600px){.contact-channel .channel-actions{grid-column:1/-1;grid-row:auto;margin-top:12px}.channel-actions .contact-action{grid-column:auto;grid-row:auto;font-size:13px}.contact-channel .qr-disclosure{grid-row:auto}.qr-disclosure img.official-qr{width:min(260px,100%)}}
+
+/* Three independent community cards, with the same reading order on mobile. */
+.contact-channels{gap:20px;align-items:start}
+.about-band .contact-channel{--channel-ink:#456b65;--channel-wash:#e4efed;position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:stretch;min-height:325px;padding:30px 24px 18px;border:1px solid #fffdf5;border-radius:19px;background:radial-gradient(ellipse at 100% 0%,var(--channel-wash),transparent 62%),linear-gradient(150deg,#fffef9,#f6f4ec);box-shadow:0 1px 2px #283b2614,0 8px 14px -10px #283b2629,0 22px 40px -22px #283b2638,inset 0 0 0 1px #d2d6ca80;transition:transform .25s,box-shadow .25s}
+.contact-channel::before{content:"";position:absolute;inset:7px;border:1px solid #ffffffa8;border-radius:13px;pointer-events:none;z-index:-1}
+.contact-channel::after{content:"";position:absolute;inset:0;border-radius:inherit;background-image:radial-gradient(#6c705b1c .55px,transparent .7px);background-size:5px 5px;opacity:.25;pointer-events:none;z-index:-1}
+.contact-channel:nth-child(2){--channel-ink:#92566b;--channel-wash:#f4e4e9}
+.contact-channel:nth-child(3){--channel-ink:#536f8b;--channel-wash:#e3edf6}
+.contact-channel .channel-platform{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;border:1px solid #ffffffc4;border-radius:24px;background:#fff9;color:var(--channel-ink);padding:6px 10px;font-size:9px;letter-spacing:.8px;box-shadow:0 1px 3px #42543a08}
+.contact-channel .channel-platform::before{content:"";width:5px;height:5px;flex-shrink:0;border-radius:50%;background:currentColor;box-shadow:0 0 0 3px #ffffffb3}
+.contact-channel h3{margin:28px 0 9px;font-size:21px;letter-spacing:.3px;color:#384234}
+.contact-channel .contact-id{margin:0 0 20px;font-size:12px;overflow-wrap:anywhere}
+.contact-channel .channel-actions{gap:6px 12px;min-height:44px;margin:0 0 24px}
+.contact-channel>.contact-action{align-self:flex-start}
+.contact-channel .contact-action{font-size:11px;gap:10px;min-height:44px;border:0;color:var(--channel-ink)}
+.contact-channel .channel-actions>a,.contact-channel>a.contact-action{border:1px solid #ffffffc4;background:var(--channel-wash);border-radius:8px;padding:9px 12px;box-shadow:0 1px 2px #34452d0a,inset 0 1px 0 #ffffffa3;transition:background .2s}
+.contact-channel .channel-actions>button{padding:8px 0;color:#78816e;font-size:10px}
+.contact-channel>.contact-action{margin-bottom:24px}
+.contact-channel>.qr-disclosure{margin-top:auto;padding-top:8px;border-top:1px solid #bac3b442}
+.contact-channel .qr-disclosure summary{font-size:11px;color:#708168;padding-top:4px}
+.contact-channel .qr-disclosure img{max-width:100%;height:auto}
+.contact-channel .qr-disclosure img.official-qr{width:100%;max-width:260px}
+@media(max-width:760px){.contact-channels{grid-template-columns:1fr;gap:16px}.about-band .contact-channel{min-height:0;padding:23px 24px 17px}.contact-channel h3{font-size:23px;margin-top:16px}.contact-channel .contact-id{font-size:14px;margin-bottom:15px}.contact-channel .contact-action{font-size:13px}.contact-channel>.qr-disclosure{margin-top:4px;padding-top:8px}.contact-channel .qr-disclosure summary{font-size:12px}}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.about-band .contact-channel:hover{transform:translateY(-4px);box-shadow:0 1px 2px #283b2614,0 12px 20px -12px #283b2630,0 28px 45px -22px #283b2640,inset 0 0 0 1px #d2d6ca80}}
