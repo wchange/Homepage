@@ -1,8 +1,12 @@
 import { readFile, writeFile, readdir, mkdir, cp } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
+const cssVersion = createHash('sha256')
+  .update(await readFile(path.join(root, 'devlog.css')))
+  .digest('hex').slice(0, 8);
 const escape = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const safeUrl = value => {
   if (!/^(https:\/\/|(?:\.\.\/)*assets\/)/.test(value)) throw new Error(`不支持的链接: ${value}`);
@@ -17,7 +21,10 @@ function inline(value) {
 function markdown(body) {
   return body.trim().split(/\n\s*\n/).map(block => {
     const image = block.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
-    if (image) return `<figure><img src="${safeUrl(image[2])}" alt="${escape(image[1])}" loading="lazy" width="2560" height="1440"><figcaption>${escape(image[1])}</figcaption></figure>`;
+    if (image) {
+      const figureClass = /\.gif$/i.test(image[2]) ? ' class="devlog-animation"' : '';
+      return `<figure${figureClass}><img src="${safeUrl(image[2])}" alt="${escape(image[1])}" loading="lazy"><figcaption>${escape(image[1])}</figcaption></figure>`;
+    }
     if (block.startsWith('## ')) return `<h2>${escape(block.slice(3))}</h2>`;
     return `<p>${inline(block.replace(/\n/g, ' '))}</p>`;
   }).join('\n');
@@ -41,7 +48,7 @@ const posts = await Promise.all(files.map(async file => {
 posts.sort((a,b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug));
 const stamp = post => `<span>${escape(post.category)}</span><time datetime="${post.date}">${post.date.replaceAll('-', ' / ')}</time>${post.sample === 'true' ? '<span class="sample-label">样例日志</span>' : ''}`;
 function shell(title, description, prefix, body) {
-  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)} · Atelier Seal &amp; Shark</title><meta name="description" content="${escape(description)}"><link rel="icon" href="${prefix}assets/studio-logo.png"><link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}devlog.css"></head><body><a class="skip-link" href="#main">跳转到主要内容</a><header class="site-header wrap"><a class="wordmark" href="${prefix}index.html"><span>Atelier</span><strong>Seal <i>&amp;</i> Shark<span class="brand-dot">.</span></strong></a><nav aria-label="主导航"><a href="${prefix}index.html#games">游戏作品</a><a href="${prefix}devlog/" aria-current="page">开发日志</a><a href="${prefix}index.html#studio">关于我们</a></nav></header><main id="main">${body}</main><footer class="site-footer wrap"><span>© ${new Date().getFullYear()} Atelier Seal &amp; Shark</span><span>Made by two. Shared with you.</span><a href="${prefix}index.html">回到工作室首页 ↗</a></footer></body></html>`;
+  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)} · Atelier Seal &amp; Shark</title><meta name="description" content="${escape(description)}"><link rel="icon" href="${prefix}assets/studio-logo.png"><link rel="stylesheet" href="${prefix}styles.css"><link rel="stylesheet" href="${prefix}devlog.css?v=${cssVersion}"></head><body><a class="skip-link" href="#main">跳转到主要内容</a><header class="site-header wrap"><a class="wordmark" href="${prefix}index.html"><span>Atelier</span><strong>Seal <i>&amp;</i> Shark<span class="brand-dot">.</span></strong></a><nav aria-label="主导航"><a href="${prefix}index.html#games">游戏作品</a><a href="${prefix}devlog/" aria-current="page">开发日志</a><a href="${prefix}index.html#studio">关于我们</a></nav></header><main id="main">${body}</main><footer class="site-footer wrap"><span>© ${new Date().getFullYear()} Atelier Seal &amp; Shark</span><span>Made by two. Shared with you.</span><a href="${prefix}index.html">回到工作室首页 ↗</a></footer></body></html>`;
 }
 function entry(post, prefix) {
   return `<a class="journal-entry" href="${prefix}devlog/${post.slug}/"><img src="${prefix}assets/${post.cover}" alt="${escape(post.coverAlt)}" width="2560" height="1440" loading="lazy"><div><div class="post-meta">${stamp(post)}</div><h3>${escape(post.title)}</h3><p>${escape(post.summary)}</p><span class="text-link">阅读手记 ↗</span></div></a>`;
