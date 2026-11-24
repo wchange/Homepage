@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>开发日志 · Atelier Seal &amp; Shark</title>
+    <link>https://sealshark.cn/devlog/</link>
+    <description>来自 Atelier Seal &amp; Shark 的开发手记。</description>
+    <language>zh-CN</language>
+    <atom:link href="https://sealshark.cn/devlog/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>鲨鱼和悠悠拉礼花</title>
+      <link>https://sealshark.cn/devlog/2026-11-18-first-page/</link>
+      <guid isPermaLink="true">https://sealshark.cn/devlog/2026-11-18-first-page/</guid>
+      <description>新做好的鲨鱼和悠悠拉礼花的动画！</description>
+      <pubDate>Thu, 19 Nov 2026 16:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

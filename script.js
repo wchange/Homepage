@@ -1,3 +1,4 @@
+const english = document.documentElement.lang === 'en';
 const lightbox = document.getElementById('lightbox');
 const preview = document.getElementById('lightbox-image');
 const caption = document.getElementById('lightbox-caption');
@@ -23,9 +24,13 @@ document.querySelectorAll('[data-copy]').forEach(button => {
     const status = document.getElementById('contact-status');
     try {
       await navigator.clipboard.writeText(button.dataset.copy);
-      status.textContent = `${button.dataset.copyLabel}已复制：${button.dataset.copy}`;
+      status.textContent = english
+        ? `Copied ${button.dataset.copyLabel}: ${button.dataset.copy}`
+        : `${button.dataset.copyLabel}已复制：${button.dataset.copy}`;
     } catch {
-      status.textContent = `请选中并手动复制${button.dataset.copyLabel}：${button.dataset.copy}`;
+      status.textContent = english
+        ? `Select and copy ${button.dataset.copyLabel}: ${button.dataset.copy}`
+        : `请选中并手动复制${button.dataset.copyLabel}：${button.dataset.copy}`;
     }
   });
 });
@@ -57,12 +62,15 @@ document.querySelectorAll('.game-carousel').forEach(carousel => {
     carousel.querySelector('.carousel-caption').textContent = selected.dataset.caption;
     carousel.querySelector('.carousel-counter').textContent = `${index + 1} / ${slides.length}`;
     slides.forEach((slide, position) => position === index ? slide.setAttribute('aria-current', 'true') : slide.removeAttribute('aria-current'));
-    if (manual) announcement.textContent = `第 ${index + 1} 张，共 ${slides.length} 张：${selected.dataset.caption}`;
+    if (manual) announcement.textContent = english
+      ? `Screenshot ${index + 1} of ${slides.length}: ${selected.dataset.caption}`
+      : `第 ${index + 1} 张，共 ${slides.length} 张：${selected.dataset.caption}`;
     schedule();
   }
   function updateToggle() {
-    toggle.textContent = paused ? '自动播放' : '暂停播放';
-    toggle.setAttribute('aria-label', paused ? '开始自动播放' : '暂停自动播放');
+    toggle.textContent = english ? (paused ? 'Play' : 'Pause') : (paused ? '自动播放' : '暂停播放');
+    const label = english ? (paused ? 'Start autoplay' : 'Pause autoplay') : (paused ? '开始自动播放' : '暂停自动播放');
+    toggle.setAttribute('aria-label', label);
     schedule();
   }
   carousel.querySelector('[data-carousel-prev]').addEventListener('click', () => show(index - 1, true));

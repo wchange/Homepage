@@ -4,3 +4,31 @@
   max-width: 420px;
   margin-inline: auto;
 }
+
+.journal-intro .journal-intro-summary {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.journal-rss {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+  margin-top: 18px;
+  padding-inline: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: #4e6b58;
+  font-size: 13px;
+}
+
+.journal-rss:hover {
+  background: #e9ede5;
+}
+
+.article-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
